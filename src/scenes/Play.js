@@ -14,7 +14,7 @@ class Play extends Phaser.Scene {
   }
 
   update(){
-    this.ocean.tilePositionX += .5;
+    this.ocean.tilePositionX += 2;
   }
 }
 
