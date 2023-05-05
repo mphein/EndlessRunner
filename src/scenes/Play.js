@@ -13,7 +13,10 @@ class Play extends Phaser.Scene {
     this.stingray = new Stingray(this, 50, game.config.height / 1.5, 'Stingray').setOrigin(.5,0);
     this.anims.create({
       key: 'swim',
-      frames: this.anims.generateFrameNumbers('stingray', {start: 0, end: 29, first: 0}),
+      frames: this.anims.generateFrameNumbers('stingray', {
+      prefix: 'Stingray',
+      suffix: '.png',
+      start: 0, end: 29, first: 0}),
       frameRate: 17
     })
     this.stingray.play('swim');
