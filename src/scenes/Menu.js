@@ -3,8 +3,14 @@ class Menu extends Phaser.Scene {
     super("menuScene");
   }
   
+  preload() {
+  }
+
   create() {
-    this.add.text(20, 20, "Endless Swimmer");
-    this.scene.start("playScene");
+    this.backgroundMusic = this.sound.add('menuSong')
+    this.backgroundMusic.play();
+    this.add.text(20, 20, "Sea Pancake");
+    this.backgroundMusic.stop();
+    this.scene.start('playScene');
   }
 }
