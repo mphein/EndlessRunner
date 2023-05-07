@@ -3,7 +3,7 @@ class Stingray extends Phaser.Physics.Arcade.Sprite {
     super(scene,x,y,texture,frame);
 
     scene.physics.add.existing(this);
-    this.scene.add.existing(this);
+    scene.add.existing(this);
     this.alive = true;
     this.velocity = 100
 
@@ -11,11 +11,7 @@ class Stingray extends Phaser.Physics.Arcade.Sprite {
     this.setCollideWorldBounds(true);
     this.setImmovable();
     this.setMaxVelocity(0, 200);
-  
-  }
-
-  create() {
-  
+    this.setGravityY(50);
   }
 
   update() {
