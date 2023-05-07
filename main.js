@@ -8,7 +8,7 @@ let config = {
     arcade: {
       gravity: {
       x: 0,
-      y: 10
+      y: 50
       }
     }
   }

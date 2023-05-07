@@ -13,7 +13,7 @@ class Play extends Phaser.Scene {
 
   create() {
     this.backgroundMusic = this.sound.add('playSong');
-    //this.backgroundMusic.play();
+    this.backgroundMusic.play();
     this.anims.create({
       key: "swim",
       frameRate: 32,
@@ -37,13 +37,11 @@ class Play extends Phaser.Scene {
   }
 
   update(){
-    if (keyUP.isDown) {
-      console.log("pussystanky")
-    }
+    
+    this.sun.tilePositionX += .25;
+    this.clouds.tilePositionX += .5;
+    this.ocean.tilePositionX += 4;
     this.stingray.update();
-    this.sun.tilePositionX += .1;
-    this.clouds.tilePositionX += .35;
-    this.ocean.tilePositionX += 1;
   }
 }
 
