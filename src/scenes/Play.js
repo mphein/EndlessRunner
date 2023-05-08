@@ -13,7 +13,7 @@ class Play extends Phaser.Scene {
   }
 
   create() {
-    this.backgroundMusic = this.sound.add('playSong');
+    this.backgroundMusic = this.sound.add('playSong', {volume: .5, loop: true});
     this.backgroundMusic.play();
     this.anims.create({
       key: "swim",
