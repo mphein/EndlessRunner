@@ -9,7 +9,6 @@ class Stingray extends Phaser.Physics.Arcade.Sprite {
 
     // physics settings
     this.setCollideWorldBounds(true);
-    this.setImmovable();
     this.setMaxVelocity(0, 150);
     this.setGravity(0,50);
   }
@@ -19,17 +18,20 @@ class Stingray extends Phaser.Physics.Arcade.Sprite {
       if (this.y <= 165) {
         if (keyDOWN.isDown) {
           this.body.velocity.y = this.velocity;
-          console.log('down');
         } else {
           this.body.velocity.y = this.velocity / 2;
         }
       } else {
         if (Phaser.Input.Keyboard.JustDown(keyUP)) {
-            console.log('up');
-            this.body.velocity.y = -this.velocity;
+            if (this.body.velocity.y > 0) {
+              this.body.velocity.y = 0;
+            }
+            this.body.velocity.y -= this.velocity;
           } else if (Phaser.Input.Keyboard.JustDown(keyDOWN)) {
-            this.body.velocity.y = this.velocity;
-            console.log('down');
+            if (this.body.velocity.y < 0) {
+              this.body.velocity.y = 0;
+            }
+            this.body.velocity.y += this.velocity;
           }
         }
       }
