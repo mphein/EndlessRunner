@@ -16,6 +16,7 @@ class Load extends Phaser.Scene {
         loadingBar.destroy();
       });
 
+      this.load.audio('waterBoop', './assets/rain.wav')
       this.load.audio('menuSong', './assets/menu.mp3');
       this.load.audio('playSong', './assets/run.mp3');
       

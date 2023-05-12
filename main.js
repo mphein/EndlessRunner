@@ -29,4 +29,4 @@ let w = game.config.width;
 let h = game.config.height;
 
 
-let keyUP, keyDOWN, keyJUMP;
+let keyR, keyUP, keyDOWN, keyJUMP
