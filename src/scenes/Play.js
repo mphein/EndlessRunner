@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
     this.load.image('ocean', './assets/Background/Ocean.png');
     this.load.image('clouds', './assets/Background/Cloud.png');
     this.load.image('sun', './assets/Background/Sun.png');
-    this.load.image('shark', './assets/Shark.png')
+    this.load.image('Pancake', './assets/Pancake.png');
     this.load.atlas('Stingray', './assets/Stingray/Stingray.png', './assets/Stingray/Stingray.json');
     this.load.atlas('Shark', './assets/Shark/Shark.png', './assets/Shark/Shark.json');
   }
@@ -48,15 +48,17 @@ class Play extends Phaser.Scene {
     this.sun = this.add.tileSprite(0,0,640,480,'sun').setOrigin(0,0);
     this.ocean = this.add.tileSprite(0,0,640,480,'ocean').setOrigin(0,0);
     this.clouds = this.add.tileSprite(0,0,640,480,'clouds').setOrigin(0,0);
+    
     // create sprites
-    this.shark1 = new Shark(this, w, 200, 160, (h + 160)/2, 'Shark0.png').setOrigin(0,.5)
-    this.shark2 = new Shark(this, w, 400, (h + 160)/2, h, 'Shark0.png').setOrigin(.5,0)
+    this.shark1 = new Shark(this, w, 200, 160, (h + 160)/2, 'Shark','Shark0.png').setOrigin(0,.5)
+    this.shark2 = new Shark(this, w, 400, (h + 160)/2, h, 'Shark', 'Shark3.png').setOrigin(0,.5)
     this.stingray = new Stingray(this, 50, game.config.height / 1.5, 'Stingray', 'Stingray0.png').setOrigin(.5,0);
     this.stingray.play('swim');
     this.shark1.play('sharkSwim');
     this.shark2.play('sharkSwim');
     this.shark1.setSize(120,50,true);
     this.shark2.setSize(120,50,true);
+    this.pancake = new Pancake(this, w, 300, 160, h, 'Pancake');
 
     // Define scene booleans and keys
     this.stingray.eaten = false;
@@ -91,6 +93,14 @@ class Play extends Phaser.Scene {
         },
         loop: true
       })
+
+      this.slowSharks = this.time.addEvent({
+        delay: 20000, 
+        callback: ()=> {
+          this.pancake.speed = 2;
+        },
+        loop: true
+      })
   }
 
   update() {
@@ -111,9 +121,10 @@ class Play extends Phaser.Scene {
       this.stingray.update();
       this.shark1.update();
       this.shark2.update();
-
+      this.pancake.update();
       this.physics.world.collide(this.stingray, this.shark1, this.sharkCollision, null, this);
       this.physics.world.collide(this.stingray, this.shark2, this.sharkCollision, null, this);
+      this.physics.world.collide(this.pancake, this.stingray, this.pancakeCollision, null, this);
     }
   }
 
@@ -122,6 +133,13 @@ class Play extends Phaser.Scene {
     this.stingray.eaten = true;
     this.stingray.destroy();
     this.gameOver = true;
+  }
+  
+  pancakeCollision() {
+    this.sound.play('bubbleUp');
+    this.shark1.speed /= 2;
+    this.shark2.speed /= 2;
+    this.pancake.stop();
   }
 }
 
