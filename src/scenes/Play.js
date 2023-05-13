@@ -10,13 +10,16 @@ class Play extends Phaser.Scene {
     this.load.image('sun', './assets/Background/Sun.png');
     this.load.image('shark', './assets/Shark.png')
     this.load.atlas('Stingray', './assets/Stingray/Stingray.png', './assets/Stingray/Stingray.json');
+    this.load.atlas('Shark', './assets/Shark/Shark.png', './assets/Shark/Shark.json');
   }
 
   create() {
     // Add background music to Scene on repeat
     this.backgroundMusic = this.sound.add('playSong', {volume: .2, loop: true});
     this.backgroundMusic.play();
-    // Create Stingray swim animation
+    // Add munch sfx
+    this.munch = this.sound.add('munch', {volume: 2});
+    // Create Stingray and Shark swim animation
     this.anims.create({
       key: "swim",
       frameRate: 32,
@@ -28,15 +31,32 @@ class Play extends Phaser.Scene {
       }),
       repeat: -1,
     })
+
+    this.anims.create({
+      key: "sharkSwim",
+      frameRate: 32,
+      frames: this.anims.generateFrameNames('Shark', {
+        prefix: 'Shark',
+        suffix: '.png',
+        start: 0,
+        end: 4
+      }),
+      repeat: -1,
+    })
+
     // Add in scrolling backgrounds
     this.sun = this.add.tileSprite(0,0,640,480,'sun').setOrigin(0,0);
     this.ocean = this.add.tileSprite(0,0,640,480,'ocean').setOrigin(0,0);
     this.clouds = this.add.tileSprite(0,0,640,480,'clouds').setOrigin(0,0);
     // create sprites
-    this.shark1 = new Shark(this, w, 200, 160, (h + 160)/2, 'shark').setOrigin(0,.5)
-    this.shark2 = new Shark(this, w, 400, (h + 160)/2, h, 'shark').setOrigin(0,.5)
+    this.shark1 = new Shark(this, w, 200, 160, (h + 160)/2, 'Shark0.png').setOrigin(0,.5)
+    this.shark2 = new Shark(this, w, 400, (h + 160)/2, h, 'Shark0.png').setOrigin(.5,0)
     this.stingray = new Stingray(this, 50, game.config.height / 1.5, 'Stingray', 'Stingray0.png').setOrigin(.5,0);
     this.stingray.play('swim');
+    this.shark1.play('sharkSwim');
+    this.shark2.play('sharkSwim');
+    this.shark1.setSize(120,50,true);
+    this.shark2.setSize(120,50,true);
 
     // Define scene booleans and keys
     this.stingray.eaten = false;
@@ -98,6 +118,7 @@ class Play extends Phaser.Scene {
   }
 
   sharkCollision() {
+    this.sound.play('munch');
     this.stingray.eaten = true;
     this.stingray.destroy();
     this.gameOver = true;
