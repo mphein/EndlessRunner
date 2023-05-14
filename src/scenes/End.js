@@ -34,6 +34,9 @@ class End extends Phaser.Scene {
             }
           }
         }
+        if (localStorage.highScore > highScore) {
+          highScore = localStorage.highScore;
+        }
 
         // Swimming Stingray
         this.anims.create({
