@@ -13,6 +13,9 @@ class Pancake extends Phaser.Physics.Arcade.Sprite {
   
     update() {
         this.x -= this.speed;
+        if (this.x <= 0 - this.width) {
+            this.stop();
+        }
     }
 
     stop() {

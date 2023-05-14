@@ -95,6 +95,7 @@ class Play extends Phaser.Scene {
       this.slowSharks = this.time.addEvent({
         delay: 30000, 
         callback: ()=> {
+          console.log('PANCAKE');
           this.pancake.speed = 2;
         },
         loop: true
