@@ -64,16 +64,18 @@ class Play extends Phaser.Scene {
     
     // Create GameObjects
     this.ship = new Ship(this, w, 148, 'Ship', 'Ship0.png').setOrigin(.5);
-    this.shark1 = new Shark(this, w, 200, 160, (h + 160)/2, 'Shark','Shark0.png').setOrigin(0,.5)
-    this.shark2 = new Shark(this, w, 400, (h + 160)/2, h, 'Shark', 'Shark3.png').setOrigin(0,.5)
+    this.shark1 = new Shark(this, w, 200, 160, (h + 160)/2, 'Shark','Shark0.png').setOrigin(.5,.5)
+    this.shark2 = new Shark(this, w, 400, (h + 160)/2, h, 'Shark', 'Shark3.png').setOrigin(.5,.5)
     this.stingray = new Stingray(this, 50, game.config.height / 1.5, 'Stingray', 'Stingray0.png').setOrigin(.5,0);
     // Play animations
     this.stingray.play('swim');
     this.ship.play('shipFlap');
     this.shark1.play('sharkSwim');
     this.shark2.play('sharkSwim');
-    this.shark1.setSize(120,50,true);
-    this.shark2.setSize(120,50,true);
+    this.shark1.setSize(70,30);
+    this.shark1.setOffset(-5,15);
+    this.shark2.setSize(70,30);
+    this.shark2.setOffset(-5,15);
     this.pancake = new Pancake(this, w, 300, 160, h, 'Pancake');
     
 
