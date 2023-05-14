@@ -23,7 +23,17 @@ class End extends Phaser.Scene {
         this.munch = this.sound.add('munch', {volume: .1});
         this.bubbles = this.sound.add('bubbleUp', {volume: .5});
 
-
+        // see https://jtruty.github.io/programming/2014/02/27/track-high-score-with-phaser.html @thirsty_engineer
+        if (this.game.device.localStorage) {
+          localStorage.score = highScore;
+          if (localStorage.highScore) {
+            if (localStorage.score > localStorage.highScore) {
+              localStorage.highScore = localStorage.score;
+            } else {
+              localStorage.highScore = localStorage.score;
+            }
+          }
+        }
 
         // Swimming Stingray
         this.anims.create({
