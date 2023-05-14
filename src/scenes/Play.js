@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
     this.load.image('Pancake', './assets/Pancake.png');
     this.load.atlas('Stingray', './assets/Stingray/Stingray.png', './assets/Stingray/Stingray.json');
     this.load.atlas('Shark', './assets/Shark/Shark.png', './assets/Shark/Shark.json');
+    this.load.atlas('Ship', './assets/Ship/Ship.png', './assets/Ship/Ship.json');
   }
 
   create() {
@@ -44,21 +45,37 @@ class Play extends Phaser.Scene {
       repeat: -1,
     })
 
+    this.anims.create({
+      key: "shipFlap",
+      frameRate: 6,
+      frames: this.anims.generateFrameNames('Ship', {
+        prefix: 'Ship',
+        suffix: '.png',
+        start: 0,
+        end: 4
+      }),
+      repeat: -1,
+    })
+
     // Add in scrolling backgrounds
     this.sun = this.add.tileSprite(0,0,640,480,'sun').setOrigin(0,0);
     this.ocean = this.add.tileSprite(0,0,640,480,'ocean').setOrigin(0,0);
     this.clouds = this.add.tileSprite(0,0,640,480,'clouds').setOrigin(0,0);
     
-    // create sprites
+    // Create GameObjects
+    this.ship = new Ship(this, w, 148, 'Ship', 'Ship0.png').setOrigin(.5);
     this.shark1 = new Shark(this, w, 200, 160, (h + 160)/2, 'Shark','Shark0.png').setOrigin(0,.5)
     this.shark2 = new Shark(this, w, 400, (h + 160)/2, h, 'Shark', 'Shark3.png').setOrigin(0,.5)
     this.stingray = new Stingray(this, 50, game.config.height / 1.5, 'Stingray', 'Stingray0.png').setOrigin(.5,0);
+    // Play animations
     this.stingray.play('swim');
+    this.ship.play('shipFlap');
     this.shark1.play('sharkSwim');
     this.shark2.play('sharkSwim');
     this.shark1.setSize(120,50,true);
     this.shark2.setSize(120,50,true);
     this.pancake = new Pancake(this, w, 300, 160, h, 'Pancake');
+    
 
     // Define scene booleans and keys
     this.stingray.eaten = false;
@@ -123,9 +140,11 @@ class Play extends Phaser.Scene {
       this.shark1.update();
       this.shark2.update();
       this.pancake.update();
+      this.ship.update();
       this.physics.world.collide(this.stingray, this.shark1, this.sharkCollision, null, this);
       this.physics.world.collide(this.stingray, this.shark2, this.sharkCollision, null, this);
       this.physics.world.collide(this.pancake, this.stingray, this.pancakeCollision, null, this);
+  
     }
   }
   // Shark collision

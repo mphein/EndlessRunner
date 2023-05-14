@@ -20,7 +20,7 @@ class End extends Phaser.Scene {
         this.backgroundMusic = this.sound.add('menuSong', {volume: .4, loop: true});
         this.backgroundMusic.play();
         this.munch = this.sound.add('munch', {volume: .1});
-        this.bubbles = this.sound.add('bubbleUp', {volume: .1});
+        this.bubbles = this.sound.add('bubbleUp', {volume: .5});
 
 
 
@@ -59,7 +59,7 @@ class End extends Phaser.Scene {
               end: 6
             }),
           })
-          // Create scene sprites
+          // Create scene GameObjects
           this.pancake1 = new Pancake(this, w/2 - 75, h/2, 0, 0, 'PancakeR', 'Pancake0.png').setOrigin(.5,0);
           this.pancake2 = new Pancake(this, w/2 + 75, h/2, 0, 0, 'PancakeF', 'Pancake0.png').setOrigin(.5,0);
           this.stingray = new Stingray(this, w/2, h/2, 'Stingray', 'Stingray0.png').setOrigin(.5,0);
