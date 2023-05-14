@@ -26,6 +26,7 @@ class End extends Phaser.Scene {
         // see https://jtruty.github.io/programming/2014/02/27/track-high-score-with-phaser.html @thirsty_engineer
         if (this.game.device.localStorage) {
           localStorage.score = highScore;
+          console.log(localStorage.score);
           if (localStorage.highScore) {
             if (localStorage.score > localStorage.highScore) {
               localStorage.highScore = localStorage.score;
@@ -34,6 +35,7 @@ class End extends Phaser.Scene {
             }
           }
         }
+
         if (localStorage.highScore > highScore) {
           highScore = localStorage.highScore;
         }
