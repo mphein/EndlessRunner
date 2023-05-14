@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
     this.load.image('clouds', './assets/Background/Cloud.png');
     this.load.image('sun', './assets/Background/Sun.png');
     this.load.image('Pancake', './assets/Pancake.png');
+    this.load.image('Bubble', './assets/Bubble.png');
     this.load.atlas('Stingray', './assets/Stingray/Stingray.png', './assets/Stingray/Stingray.json');
     this.load.atlas('Shark', './assets/Shark/Shark.png', './assets/Shark/Shark.json');
     this.load.atlas('Ship', './assets/Ship/Ship.png', './assets/Ship/Ship.json');
@@ -119,6 +120,26 @@ class Play extends Phaser.Scene {
         },
         loop: true
       })
+
+      // Stingray particles
+      // Shark Particles (Sharticles)
+      let sharkConfig = {
+        //start: 1,
+        quantity: 1,
+        speedY: {min: 1, max:25},
+        accelerationY: 10,
+        accelerationX: 20,
+        speedX: {min: 1, max: 25},
+        follow: this.shark1,
+        followOffset: {x: this.shark1.width /2.5},
+        scale: {start:.05, end:1},
+        lifespan: {min: 100, max: 800}
+    };
+      this.s1particles = this.add.particles(0,0,'Bubble',sharkConfig);
+      sharkConfig.follow = this.shark2;
+      this.s2particles = this.add.particles(0,0,'Bubble', sharkConfig);
+      
+      
   }
 
   update() {
