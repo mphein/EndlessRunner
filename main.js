@@ -29,6 +29,6 @@ let w = game.config.width;
 let h = game.config.height;
 
 
-let keyR, keyP, keyUP, keyDOWN, keyJUMP;
+let keyR, keyP, keyUP, keyDOWN, keyJUMP, keyM;
 let highScore = 0;
 let score = 0;

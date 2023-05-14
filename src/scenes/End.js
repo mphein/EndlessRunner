@@ -14,8 +14,9 @@ class End extends Phaser.Scene {
     }
   
     create() {
-        // Add restard input 
+        // Add restart input 
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         // Create scene sounds
         this.backgroundMusic = this.sound.add('menuSong', {volume: .4, loop: true});
         this.backgroundMusic.play();
@@ -79,9 +80,10 @@ class End extends Phaser.Scene {
             fixedWidth: 0
         }
         // Text for score and credits
+        
         this.add.text(w/2, h/4, 'You scored: ' + score, this.gameOverConfig).setOrigin(0.5);
         this.add.text(w/2, h/3, 'High score: ' + highScore, this.gameOverConfig).setOrigin(0.5);
-        this.add.text(w/2, h/3 + 40, 'Press (R) to Restart', this.gameOverConfig).setOrigin(0.5);
+        this.add.text(w/2, h/3 + 40, 'Press (R) to Restart or Press (M) for Menu', this.gameOverConfig).setOrigin(0.5);
         this.add.text(w/2, h/2 + 70, 'Artwork and Programming by Michael Hein', this.gameOverConfig).setOrigin(0.5);
         this.gameOverConfig.fontSize = 12
         this.add.text(w/2, h/2 + 110, 'Chewing, Breadstick, Single, E.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org', this.gameOverConfig).setOrigin(0.5);
@@ -117,5 +119,10 @@ class End extends Phaser.Scene {
             this.backgroundMusic.stop();
             this.scene.start('playScene');
         }
+        if (Phaser.Input.Keyboard.JustDown(keyM)) {
+          this.sound.play('waterBoop')
+          this.backgroundMusic.stop();
+          this.scene.start('menuScene');
+      }
     }
   }
