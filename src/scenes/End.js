@@ -24,13 +24,18 @@ class End extends Phaser.Scene {
         this.bubbles = this.sound.add('bubbleUp', {volume: .5});
 
         // see https://rexrainbow.github.io/phaser3-rex-notes/docs/site/localstorage/
+        console.log(localStorage.getItem('highScore'))
         if (!localStorage.getItem('highScore')) {
           localStorage.setItem('highScore', highScore);
+          console.log(localStorage.getItem('highScore'))
         } else {
           if (localStorage.getItem('highScore') < highScore) {
             localStorage.setItem('highScore', highScore);
+            console.log(localStorage.getItem('highScore'))
           } else {
             highScore = localStorage.getItem('highScore');
+            console.log(localStorage.getItem('highScore'))
+
           }
         }
 
