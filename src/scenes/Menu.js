@@ -27,6 +27,9 @@ class Menu extends Phaser.Scene {
   }
     this.menuInstruct = this.add.text(w/2, 30, 'Tap ↑ to swim up and ↓ to swim down', this.menuConfig).setOrigin(.5);
     this.add.text(w/2, h - 30, 'Press (P) to play!', this.menuConfig).setOrigin(.5);
+    this.menuConfig.color = '#000000'
+    this.menuInstruct = this.add.text(w*3/4, h-100, 'An endless swimmer!', this.menuConfig).setOrigin(.5);
+
   }
 
   update() {
