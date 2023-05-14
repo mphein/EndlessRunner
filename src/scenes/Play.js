@@ -63,25 +63,23 @@ class Play extends Phaser.Scene {
     // Define scene booleans and keys
     this.stingray.eaten = false;
     this.score = 0;
-    this.lives = 3;
     keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-    keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     this.gameOver = false;
     
-    //
-    this.gameOverConfig = {
-            fontFamily: 'Courier',
+    // Score configuration
+    this.scoreConfig = {
+            fontFamily: 'Brush Script MT',
             fontSize: '28px',
-            backgroundColor: '#FFFFFF',
-            color: '#F00000',
-            align: 'right',
+            color: '#000000',
             padding: {
                 top: 5,
                 bottom: 5,
             },
             fixedWidth: 0
         }
+      this.scoreLeft = this.add.text(20, 20, this.score, this.scoreConfig);
+
       // Define shark speedup loop currently set to 10 sec
       this.speedySharks = this.time.addEvent({
         delay: 10000, 
@@ -93,9 +91,9 @@ class Play extends Phaser.Scene {
         },
         loop: true
       })
-
+      // Pancake power up
       this.slowSharks = this.time.addEvent({
-        delay: 20000, 
+        delay: 30000, 
         callback: ()=> {
           this.pancake.speed = 2;
         },
@@ -104,17 +102,19 @@ class Play extends Phaser.Scene {
   }
 
   update() {
+    // Game over
     if (this.gameOver) {
-      this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', this.gameOverConfig).setOrigin(0.5);
-      this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart', this.gameOverConfig).setOrigin(0.5);
-      if (Phaser.Input.Keyboard.JustDown(keyR)) {
-        this.sound.play('waterBoop')
-        this.backgroundMusic.stop();
-        this.scene.restart();
+      if (this.score > highScore) {
+        highScore = this.score;
       }
+      score = this.score;
+      this.backgroundMusic.stop();
+      this.scene.start('endScene');
     }
-
+    // Update positions, score, check for collisions
     if (!this.gameOver) {
+      this.score++;
+      this.scoreLeft.setText(this.score);
       this.sun.tilePositionX += .25;
       this.clouds.tilePositionX += .5;
       this.ocean.tilePositionX += 4;
@@ -127,14 +127,14 @@ class Play extends Phaser.Scene {
       this.physics.world.collide(this.pancake, this.stingray, this.pancakeCollision, null, this);
     }
   }
-
+  // Shark collision
   sharkCollision() {
     this.sound.play('munch');
     this.stingray.eaten = true;
     this.stingray.destroy();
     this.gameOver = true;
   }
-  
+  // Pancake collision
   pancakeCollision() {
     this.sound.play('bubbleUp');
     this.shark1.speed /= 2;
