@@ -8,6 +8,7 @@ class End extends Phaser.Scene {
         this.load.image('ocean', './assets/Background/Ocean.png');
         this.load.image('clouds', './assets/Background/Cloud.png');
         this.load.image('sun', './assets/Background/Sun.png');
+        this.load.image('Heart', './assets/Heart.png')
         this.load.atlas('PancakeF', './assets/PancakeFront/Pancake.png','./assets/PancakeFront/Pancake.json');
         this.load.atlas('PancakeR', './assets/PancakeRev/Pancake.png','./assets/PancakeRev/Pancake.json');
         this.load.atlas('Stingray', './assets/Stingray/Stingray.png', './assets/Stingray/Stingray.json');
@@ -33,6 +34,7 @@ class End extends Phaser.Scene {
             highScore = localStorage.getItem('highScore');
           }
         }
+
 
         // Swimming Stingray
         this.anims.create({
@@ -118,7 +120,18 @@ class End extends Phaser.Scene {
         },
             loop: true
           })
-
+          
+          // Heart Emitter
+          // Adapted from https://github.com/photonstorm/phaser3-examples/blob/master/public/src/game%20objects/particle%20emitter/explode%20emitter.js
+          let heartEmitter = this.add.particles(w/2, h/2 +10, 'Heart', {
+            quantity: 1,
+            maxAliveParticles: 100,
+            lifespan: 4000,
+            speed: {min: 250, max: 500},
+            scale: {start: .1, end: 3},
+            gravityY: 300,
+            emitting: true
+          })
     }
 
     update() {
