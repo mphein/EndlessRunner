@@ -142,13 +142,13 @@ class Play extends Phaser.Scene {
         quantity: .1,
         frequency: 100,
         speedY: {min: -1, max:-25},
-        accelerationY: -10,
-        accelerationX: 0,
-        speedX: {min: -1, max: -25},
+        accelerationY: 10,
+        accelerationX: -100,
+        speedX: {min: -1, max: -100},
         follow: this.stingray,
         followOffset: {y: 30, x: -5},
         scale: {start:.05, end:1},
-        lifespan: {min: 200, max: 500},
+        lifespan: {min: 200, max: 1000},
         alpha: .3
       }
       this.stingrayparticles = this.add.particles(0,0,'Bubble', stingrayConfig);
