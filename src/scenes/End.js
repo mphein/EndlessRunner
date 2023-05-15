@@ -91,7 +91,6 @@ class End extends Phaser.Scene {
             fixedWidth: 0
         }
         // Text for score and credits
-        
         this.add.text(w/2, h/4, 'You scored: ' + score, this.gameOverConfig).setOrigin(0.5);
         this.add.text(w/2, h/3, 'High score: ' + highScore, this.gameOverConfig).setOrigin(0.5);
         this.add.text(w/2, h/3 + 40, 'Press (R) to Restart or Press (M) for Menu', this.gameOverConfig).setOrigin(0.5);
@@ -101,6 +100,9 @@ class End extends Phaser.Scene {
         this.add.text(w/2, h/2 + 140, 'Background music from pixelbay Royalty free music', this.gameOverConfig).setOrigin(0.5);
         this.add.text(w/2, h/2 + 170, '(Summer Surf by AudioCoffee + Waves and Tears by JuliusH)', this.gameOverConfig).setOrigin(0.5);
         this.add.text(w/2, h/2 + 200, 'All other SFX created at jsfxr.me', this.gameOverConfig).setOrigin(0.5);
+        this.gameOverConfig.fontSize = 36;
+        this.add.text(w/2, 70, 'Thanks for Playing!', this.gameOverConfig).setOrigin(0.5);
+
 
         // Cute stingray flipping time
         this.flipStingray = this.time.addEvent({
