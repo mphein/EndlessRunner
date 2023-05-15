@@ -132,7 +132,7 @@ class Play extends Phaser.Scene {
         follow: this.shark1,
         followOffset: {x: this.shark1.width /2.5},
         scale: {start:.05, end:1},
-        lifespan: {min: 100, max: 800},
+        lifespan: {min: 100, max: 1500},
         alpha: .6
     };
       this.s1particles = this.add.particles(0,0,'Bubble',sharkConfig);
