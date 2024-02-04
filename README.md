@@ -10,3 +10,7 @@ This project features custom sprites and animations created by me. This endless 
 Apart from custom artwork this project features scene management, player input, high score tracking, animations, menus, update loops, classes, configs, collisions, and physics.
 
 Can be played at the github pages link!
+
+Challenges: Creating animations in Phaser3. Drawing frames using the sprites I created. Designing the sharks to feel "random" in terms on their spawn location when they respawn on the right side of the screen. How to balance the gameplay to increase in difficulty as gameplay progresses as typical endless runners tend to do. 
+
+Learned: Animations in Phaser3, physics and collisions in Phaser. 2D pixel art sprites. Time management when creating a solo project from start to finish with multiple menus, UI elements. How to create a bit of resistance in the water to make the movement feel a bit more like swimming. 
